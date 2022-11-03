@@ -63,7 +63,7 @@ export const LoadAssets = ({ assets, fonts, children }: LoadAssetsProps) => {
     }
   }, [isNavigationReady]);
   const onStateChange = useCallback(
-    (state) =>
+    (state: any) =>
       AsyncStorage.setItem(NAVIGATION_STATE_KEY, JSON.stringify(state)),
     []
   );

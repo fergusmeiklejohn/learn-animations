@@ -6,7 +6,7 @@ import Animated, {
   useSharedValue,
   withDecay,
 } from "react-native-reanimated";
-import { clamp } from "react-native-redash";
+import { clamp, withBouncing } from "react-native-redash";
 
 import { Card, Cards, CARD_HEIGHT, CARD_WIDTH } from "../../components";
 
@@ -37,14 +37,20 @@ export const PanGesture = ({ width, height }: GestureProps) => {
       translateY.value = clamp(context.offsetY + event.translationY, 0, boundY);
     },
     onEnd: (event, context) => {
-      translateX.value = withDecay({
-        velocity: event.velocityX,
-        clamp: [0, boundX],
-      });
-      translateY.value = withDecay({
-        velocity: event.velocityY,
-        clamp: [0, boundY],
-      });
+      translateX.value = withBouncing(
+        withDecay({
+          velocity: event.velocityX,
+        }),
+        0,
+        boundX
+      );
+      translateY.value = withBouncing(
+        withDecay({
+          velocity: event.velocityY,
+        }),
+        0,
+        boundY
+      );
     },
   });
 

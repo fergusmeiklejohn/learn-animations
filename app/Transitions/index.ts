@@ -1,1 +1,1 @@
-export { Transitions } from "./Transitions";
+export { Transitions } from "./boilerplate/Transitions";
